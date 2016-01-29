@@ -1,0 +1,51 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 11.08.0 ] */
+
+/* [wxMaxima: input   start ] */
+kill(t);
+kill(r);
+kill(l);
+klll(V);
+kill(P[0]);
+kill(P[H]);
+kill(P[s]);
+kill(S);
+kill(T);
+kill(n);
+kill(t1);
+V:%pi*r^2*l;
+
+t1:(0.528*P[H]-P[0])/(P[H])*(V/(0.1854*S*P[s]*n)*sqrt(273.0/T));
+
+Pi(t):=P[0]+P[H]*t/(V/(0.1854*S*P[s]*n)*sqrt(273.0/T));
+Pe(t):=P[H]/2 + P[H]/2 * sin(2*((t-t1)/(V/(0.1854*S*P[s]*n)*sqrt(273.0/T))+A));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+P[0]:1.013;
+P[H]:(5.0+1.013);
+P[s]:1.013;
+r:1;
+l:20;
+V:%pi*r^2*l;
+S:8;
+T:300.0;
+n:1.4;
+A:0.028;
+Pi(t);
+to:(1.285-0.1013/(P[H]/10))*5.216*V/S/n*sqrt(273.16/T);
+t1:(0.528*P[H]-P[0])/(P[H])*(V/(0.1854*S*P[s]*n)*sqrt(273.0/T));
+float(to);
+float(t1);
+P(t):= if (t < t1) then Pi(t) else Pe(t);
+plot2d(P(t)-1.0,[t,0,to],[y,0,5]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+ f(x):= if abs(x)>1 then 12/(abs(x)+1) else x^4-x^2+6;
+g(x):= if abs(x)<=2 then 1/2*cos(2*%pi*x)+7/2;
+plot2d([f(x), g(x)], [x, -8, 8]);
+/* [wxMaxima: input   end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$

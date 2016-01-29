@@ -1,0 +1,193 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 11.08.0 ] */
+
+/* [wxMaxima: input   start ] */
+e3:'diff(y(t),t,2)+2 *%xi *%omega * 'diff(y(t),t,1)+ %omega^2 *y(t)=0;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+ode2(e3,y(t),t);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+ic2(%,t=0,y(t)=g/(%omega^2), 'diff(y(t),t)=v);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(%omega,%xi,v);
+z(t):=%e^(-%omega*%xi*t)*((g/(%omega)^2)*cos((sqrt(4*%omega^2-4*%omega^2*%xi^2)*t)/2)-
+(sin((sqrt(4*%omega^2-4*%omega^2*%xi^2)*t)/2)*(sqrt(4*%omega^2-4*%omega^2*%xi^2)*v+(g/(%omega)^2)*%omega*%xi*sqrt(4*%omega^2-4*%omega^2*%xi^2)))/(2*%omega^2*%xi^2-2*%omega^2));
+ratsimp(diff(z(t),t,1));
+diff(z(t),t,1);
+radcan(z(t));
+solve(diff(z(t),t,1)=0,t);
+tmin(%omega,%xi):=1.0/(%omega*sqrt(1-%xi^2))*atan2(%omega*v*sqrt(1-%xi^2),(%omega*v*%xi+g));
+tmin_sub(%omega,%xi):=1.0/(%omega*sqrt(1-%xi^2))*atan2(g*sqrt(1-%xi^2),(%omega*v+%xi*g));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+%omega:10.0;
+%xi:0.9;
+g:9.8;
+h:0.5;
+v:-sqrt(2*g*h);
+
+z(t):=%e^(-%omega*%xi*t)*((g/(%omega)^2)*cos((sqrt(4*%omega^2-4*%omega^2*%xi^2)*t)/2)-
+(sin((sqrt(4*%omega^2-4*%omega^2*%xi^2)*t)/2)*(sqrt(4*%omega^2-4*%omega^2*%xi^2)*v+(g/(%omega)^2)*%omega*%xi*sqrt(4*%omega^2-4*%omega^2*%xi^2)))/(2*%omega^2*%xi^2-2*%omega^2));
+plot2d([diff(z(t),t,2)],[t,0,1.0]);
+/*plot2d([z(t)],[t,0,1.0]);*/
+/*to(%omega,%xi):=-atan((4*%omega*v*%xi^4+2*g*%xi^2-5*%omega*v*%xi^2+%omega*v)/(sqrt(1-%xi^2)*(4*%omega*v*%xi^3+2*g*%xi^2-3*%omega*v*%xi-g)))/(%omega*sqrt(1-%xi^2));*/
+to_sub(%omega,%xi):=-atan2((4*%omega*v*%xi^4-2*g*%xi*(1-%xi^2)-5*%omega*v*%xi^2+%omega*v),(sqrt(1-%xi^2)*(4*%omega*v*%xi^3+2*g*%xi^2-3*%omega*v*%xi-g)))/(%omega*sqrt(1-%xi^2));
+
+to(%omega,%xi):=if to_sub(%omega,%xi)>0 then to_sub(%omega,%xi) else to_sub(%omega,%xi)+2*%pi/(%omega*sqrt(1-%xi^2));
+/*plot3d(to_sub(%omega,%xi),[%omega,0,20],[%xi,0,1.0]);*/
+
+float(to_sub(%omega,%xi));
+float(to(%omega,%xi));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(t);
+g:9.8;
+h:0.0;
+v:-sqrt(2*g*h);
+%omega:5;
+%xi:0.35;
+plot2d([z(t)],[t,0,2.5]);
+/*plot2d([diff(z(t),t,1)],[t,0,2.5]);*/
+
+
+float(tmin(%omega,%xi));
+tminplus(%omega,%xi):=if tmin(%omega,%xi)<0 then tmin(%omega,%xi)+%pi/(%omega*sqrt(1-%xi^2)) else tmin(%omega,%xi);
+float(tminplus(%omega,%xi));
+i:0;
+if i = 1 then plot3d(tminplus(%omega,%xi),[%omega,0,20],[%xi,0.1,0.9]);
+if i = 1 then contour_plot(tminplus(%omega,%xi),[%omega,0,20],[%xi,0.1,0.9], [gnuplot_preamble, "set cntrparam levels incremental 0,0.5,5"]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(t);
+h:0.5;
+g:9.8;
+v:-sqrt(2*g*h);
+
+%omega:8;
+%xi:0.9;
+
+radcan(diff(z(t),t,2));
+plot2d([(diff(z(t),t,2))],[t,0.0,2.5]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+k:1.0 *%omega^2;
+c:2.0* 1.0* %xi* %omega;
+z(t);
+zz(t):=-k*z(t)-c*(diff(z(t),t,1));
+plot2d([zz(t)],[t,0,2.5]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+float(diff(z(r),r,2);
+solve((diff(z(t),t,3))=0,t);
+1.0/3.0*atan2(24,7);
+plot2d([(diff(z(t),t,2))],[t,0.0,2.5]);), numer;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(%omega,%xi);
+h:0.5;
+g:9.8;
+v:-sqrt(2*g*h);
+/*to(%omega,%xi):=-atan((4*%omega*v*%xi^4+2*g*%xi^2-5*%omega*v*%xi^2+%omega*v)/(sqrt(1-%xi^2)*(4*%omega*v*%xi^3+2*g*%xi^2-3*%omega*v*%xi-g)))/(%omega*sqrt(1-%xi^2));*/
+to_sub(%omega,%xi):=-atan2((4*%omega*v*%xi^4-2*g*%xi*(1-%xi^2)-5*%omega*v*%xi^2+%omega*v),(sqrt(1-%xi^2)*(4*%omega*v*%xi^3+2*g*%xi^2-3*%omega*v*%xi-g)))/(%omega*sqrt(1-%xi^2));
+to(%omega,%xi):=if to_sub(%omega,%xi)>0 then to_sub(%omega,%xi) else 0;
+/*plot3d(to(%omega,%xi),[%omega,0,20],[%xi,0,0.8]);*/
+plot3d(to(%omega,%xi),[%omega,0,20],[%xi,0.1,0.9]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(%omega,%xi);
+h:0.5;
+g:9.8;
+v:-sqrt(2*g*h);
+m:13.5;
+to_sub(%omega,%xi):=-atan2((4*%omega*v*%xi^4-2*g*%xi*(1-%xi^2)-5*%omega*v*%xi^2+%omega*v),(sqrt(1-%xi^2)*(4*%omega*v*%xi^3+2*g*%xi^2-3*%omega*v*%xi-g)))/(%omega*sqrt(1-%xi^2));
+radcan(ddz(%omega,%xi):=(%e^(-%omega*%xi*to_sub(%omega,%xi))*(sqrt(%xi-1)*sqrt(%xi+1)*((2*%omega*%xi^2-%omega)*sinh(%omega*sqrt(%xi-1)*sqrt(%xi+1)*to_sub(%omega,%xi))*v+%xi*g*sinh(%omega*sqrt(%xi-1)*sqrt(%xi+1)*to_sub(%omega,%xi)))+(2*%omega*%xi-2*%omega*%xi^3)*cosh(%omega*sqrt(%xi-1)*sqrt(%xi+1)*to_sub(%omega,%xi))*v+(1-%xi^2)*g*cosh(%omega*sqrt(%xi-1)*sqrt(%xi+1)*to_sub(%omega,%xi))))/(%xi^2-1));
+
+to(%omega,%xi):=if to_sub(%omega,%xi)>0 then to_sub(%omega,%xi) else 0;
+
+fmax(%omega,%xi):= -m*%e^(-%omega*%xi*to(%omega,%xi))/sqrt((1-%xi^2))*((-2.0*%omega*v*%xi^2-g*%xi+%omega*v)*sin(%omega*sqrt(1-%xi^2)*to(%omega,%xi))+(2*%omega*v*%xi+g)*sqrt(1-%xi^2)*cos(%omega*sqrt(1-%xi^2)*to(%omega,%xi)));
+plot3d(fmax(%omega,%xi),[%omega,0,20],[%xi,0.1,0.9]);
+contour_plot(fmax(%omega,%xi),[%omega,0,20],[%xi,0.1,0.9], [gnuplot_preamble, "set cntrparam levels incremental 0,5,60"]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(%omega);
+kill(%xi);
+
+h:0.5;
+g:9.8;
+v:-sqrt(2*g*h);
+
+to_sub(%omega,%xi):=-atan2((4*%omega*v*%xi^4-2*g*%xi*(1-%xi^2)-5*%omega*v*%xi^2+%omega*v),(sqrt(1-%xi^2)*(4*%omega*v*%xi^3+2*g*%xi^2-3*%omega*v*%xi-g)))/(%omega*sqrt(1-%xi^2));
+tmin(%omega,%xi):=1.0/(%omega*sqrt(1-%xi^2))*atan2(%omega*v*sqrt(1-%xi^2),%omega*v*%xi+g);
+tminplus(%omega,%xi):=if tmin(%omega,%xi)<0 then tmin(%omega,%xi)+%pi/(%omega*sqrt(1-%xi^2)) else tmin(%omega,%xi);
+at(%omega,%xi):=atan2(4*%omega*v*%xi^4-2*g*%xi*(1-%xi^2)+(-5)*%omega*v*%xi^2+%omega*v,sqrt(1-%xi^2)*(4*%omega*v*%xi^3+2*g*%xi^2+(-3)*%omega*v*%xi-g));
+
+
+plot3d(tminplus(%omega,%xi),[%omega,0,20],[%xi,0.1,0.9]);
+
+i:=0;
+if i=1 then contour_plot(tminplus(%omega,%xi),[%omega,0,20],[%xi,0.1,0.9], [gnuplot_preamble, "set cntrparam levels incremental 0,1.0,10"]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(%omega);
+kill(%xi);
+
+h:0.5;
+g:9.8;
+v:-sqrt(2*g*h);
+to_sub(%omega,%xi):=-atan2((4*%omega*v*%xi^4-2*g*%xi*(1-%xi^2)-5*%omega*v*%xi^2+%omega*v),(sqrt(1-%xi^2)*(4*%omega*v*%xi^3+2*g*%xi^2-3*%omega*v*%xi-g)))/(%omega*sqrt(1-%xi^2));
+
+tmin(%omega,%xi):=1.0/(%omega*sqrt(1-%xi^2))*atan2(%omega*v*sqrt(1-%xi^2),%omega*v*%xi+g);
+tminplus(%omega,%xi):=if tmin(%omega,%xi)<0 then tmin(%omega,%xi)+%pi/(%omega*sqrt(1-%xi^2)) else tmin(%omega,%xi);
+
+zmin(%omega,%xi):=%e^(-%omega*%xi*tminplus(%omega,%xi))*((g/(%omega)^2)*cos((sqrt(4*%omega^2-4*%omega^2*%xi^2)*tminplus(%omega,%xi))/2)-
+(sin((sqrt(4*%omega^2-4*%omega^2*%xi^2)*tminplus(%omega,%xi))/2)*(sqrt(4*%omega^2-4*%omega^2*%xi^2)*v+(g/(%omega)^2)*%omega*%xi*sqrt(4*%omega^2-4*%omega^2*%xi^2)))/(2*%omega^2*%xi^2-2*%omega^2))-g/(%omega^2);
+
+plot3d(zmin(%omega,%xi),[%omega,0,20],[%xi,0.1,0.9]);
+
+i:1;
+if i=1 then contour_plot(zmin(%omega,%xi),[%omega,0,20],[%xi,0.1,0.9], [gnuplot_preamble, "set cntrparam levels incremental 0,-0.1,-0.5"]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h:0.2;
+g:9.8;
+v:-sqrt(2*g*h);
+
+m:1.0;
+to_sub(%omega,%xi):=-atan2((4*%omega*v*%xi^4-2*g*%xi*(1-%xi^2)-5*%omega*v*%xi^2+%omega*v),(sqrt(1-%xi^2)*(4*%omega*v*%xi^3+2*g*%xi^2-3*%omega*v*%xi-g)))/(%omega*sqrt(1-%xi^2));
+radcan(ddz(%omega,%xi):=(%e^(-%omega*%xi*to_sub(%omega,%xi))*(sqrt(%xi-1)*sqrt(%xi+1)*((2*%omega*%xi^2-%omega)*sinh(%omega*sqrt(%xi-1)*sqrt(%xi+1)*to_sub(%omega,%xi))*v+%xi*g*sinh(%omega*sqrt(%xi-1)*sqrt(%xi+1)*to_sub(%omega,%xi)))+(2*%omega*%xi-2*%omega*%xi^3)*cosh(%omega*sqrt(%xi-1)*sqrt(%xi+1)*to_sub(%omega,%xi))*v+(1-%xi^2)*g*cosh(%omega*sqrt(%xi-1)*sqrt(%xi+1)*to_sub(%omega,%xi))))/(%xi^2-1));
+
+fmax(%omega,%xi):=-m*%e^(-%omega*%xi*to_sub(%omega,%xi))/sqrt((1-%xi^2))*((-2.0*%omega*v*%xi^2-g*%xi+%omega*v)*sin(%omega*sqrt(1-%xi^2)*to_sub(%omega,%xi))+(2*%omega*v*%xi+g)*sqrt(1-%xi^2)*cos(%omega*sqrt(1-%xi^2)*to_sub(%omega,%xi)));
+tmin(%omega,%xi):=1.0/(%omega*sqrt(1-%xi^2))*atan2(%omega*v*sqrt(1-%xi^2),%omega*v*%xi+g);
+tminplus(%omega,%xi):=if tmin(%omega,%xi)<0 then tmin(%omega,%xi)+%pi/(%omega*sqrt(1-%xi^2)) else tmin(%omega,%xi);
+
+zmin(%omega,%xi):=%e^(-%omega*%xi*tminplus(%omega,%xi))*((g/(%omega)^2)*cos((sqrt(4*%omega^2-4*%omega^2*%xi^2)*tminplus(%omega,%xi))/2)-
+(sin((sqrt(4*%omega^2-4*%omega^2*%xi^2)*tminplus(%omega,%xi))/2)*(sqrt(4*%omega^2-4*%omega^2*%xi^2)*v+(g/(%omega)^2)*%omega*%xi*sqrt(4*%omega^2-4*%omega^2*%xi^2)))/(2*%omega^2*%xi^2-2*%omega^2))-g/(%omega^2);
+
+
+i:-1;
+if i=1 then plot3d(fmax(%omega,%xi),[%omega,0,20],[%xi,0.1,0.9]);
+
+plot3d([fmax(%omega,%xi),zmin(%omega,%xi),[%omega,0,20],[%xi,0.1,0.9]]);
+
+if i=-1 then contour_plot(fmax(%omega,%xi),[%omega,0,20],[%xi,0.1,0.9], [gnuplot_preamble, "set cntrparam levels incremental 0,5,30"]);
+
+if i=2 then contour_plot(zmin(%omega,%xi),[%omega,0,20],[%xi,0.1,0.9], [gnuplot_preamble, "set cntrparam levels incremental 0,-0.1,-0.5"]);
+/* [wxMaxima: input   end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$

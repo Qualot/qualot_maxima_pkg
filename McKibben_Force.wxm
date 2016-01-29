@@ -1,0 +1,21 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 11.08.0 ] */
+
+/* [wxMaxima: input   start ] */
+kill(Do);
+kill(P);
+kill(%theta);
+kill(%epsilon);
+F(%epsilon):=%pi/4*Do^2*P/sin(%theta)^2*(3*(1-%epsilon)^2*cos(%theta)^2-1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+Do:0.01;
+P:0.1013*1000000;
+%theta:%pi/6.0;
+F(%epsilon);
+plot2d(F(%epsilon),[%epsilon,-0.05,0.25]);
+/* [wxMaxima: input   end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$
