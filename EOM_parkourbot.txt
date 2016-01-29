@@ -1,0 +1,36 @@
+depends([zeta,phi],t);
+
+dzeta:diff(zeta,t);
+dphi:diff(phi,t);
+ddzeta:diff(zeta,t,2);
+ddphi:diff(phi,t,2);
+
+q:[zeta,phi];
+dq:[dzeta,dphi];
+ddq:[ddzeta,ddphi];
+
+f:[fc,0];
+
+x:zeta*cos(phi);
+y:zeta*sin(phi);
+dx:diff(x,t);
+dy:diff(y,t);
+v:trigsimp(sqrt(dx^2+dy^2));
+K:1/2*m*v^2;
+U:m*g*y+1/2*k*(zeta-zeta0)^2;
+D:1/2*mu*v^2;
+
+L:K-U;
+
+N:length(q);
+for i:1 step 1 thru N do (
+dLq[i]:diff(L,dq[i]),
+temp:0,
+for j:1 step 1 thru N do (
+        temp:temp + diff(dLq[i],dq[j])*ddq[j]
+            + diff(dLq[i],q[j])*dq[j]),
+ddLq[i]:temp,
+eq[i]:ddLq[i] - diff(L,q[i]) + diff(D,dq[i]) - f[i]);
+
+for i:1 thru N do
+    print(eq[i]);
