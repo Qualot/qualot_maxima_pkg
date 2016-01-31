@@ -1,0 +1,36 @@
+depends([r,phi],t);
+
+dr:diff(r,t);
+dphi:diff(phi,t);
+ddr:diff(r,t,2);
+ddphi:diff(phi,t,2);
+
+q:[r,phi];
+dq:[dr,dphi];
+ddq:[ddr,ddphi];
+
+f:[fc,0];
+
+x:r*cos(phi);
+y:r*sin(phi);
+dx:diff(x,t);
+dy:diff(y,t);
+v:trigsimp(sqrt(dx^2+dy^2));
+K:1/2*m*v^2;
+U:m*g*y+1/2*k*(r-r0)^2;
+D:1/2*mu*v^2;
+
+L:K-U;
+
+N:length(q);
+for i:1 step 1 thru N do (
+dLq[i]:diff(L,dq[i]),
+temp:0,
+for j:1 step 1 thru N do (
+        temp:temp + diff(dLq[i],dq[j])*ddq[j]
+            + diff(dLq[i],q[j])*dq[j]),
+ddLq[i]:temp,
+eq[i]:ddLq[i] - diff(L,q[i]) + diff(D,dq[i]) - f[i]);
+
+for i:1 thru N do
+    print(eq[i]);
