@@ -1,24 +1,40 @@
-depends([r,phi],t);
+depends([xl,xf,phi],t);
 
-dr:diff(r,t);
+dxl:diff(xl,t);
+dxf:diff(xf,t);
 dphi:diff(phi,t);
-ddr:diff(r,t,2);
+ddxl:diff(xl,t,2);
+ddxf:diff(xf,t,2);
 ddphi:diff(phi,t,2);
 
-q:[r,phi];
-dq:[dr,dphi];
-ddq:[ddr,ddphi];
 
-f:[fc,0];
+q:[xl,xf,phi];
+dq:[dxl,dxf,dphi];
+ddq:[ddxl,ddxf,ddphi];
 
-x:r*cos(phi);
-y:r*sin(phi);
+f:[fl,ff,0];
+
+ll:xl+ll0;
+lf:xf+lf0;
+
+lall:ll+lf;
+
+
+x:lall*cos(phi);
+y:lall*sin(phi);
+xf:lf*cos(phi);
+yf:lf*sin(phi);
 dx:diff(x,t);
 dy:diff(y,t);
+dxf:diff(xf,t);
+dyf:diff(yf,t);
+
+
 v:trigsimp(sqrt(dx^2+dy^2));
-K:1/2*m*v^2;
-U:m*g*y+1/2*k*(r-r0)^2;
-D:1/2*mu*v^2;
+vf:trigsimp(sqrt(dxf^2+dyf^2));
+K:1/2*m*v^2+1/2*a*m*vf^2;
+U:m*g*y+mf*g*yf+1/2*kl*xl^2+1/2*kf*xf^2;
+D:1/2*df*vf^2;
 
 L:K-U;
 
