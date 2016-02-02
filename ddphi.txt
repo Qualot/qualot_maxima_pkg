@@ -1,0 +1,20 @@
+ddphi=
+-(((2*a-2)*m*dphi*xl+(2*a-2)*m*dphi*xf
++((2*a-2)*ll0+(2*a-2)*lf0)*m*dphi)*dxl
+
++((2*a-2)*m*dphi*dxf+(a-1)*m*g*cos(phi))*xl
++(((2*a-2)*ll0-2*lf0)*m*dphi)-2*m*dphi*xf
+
++(kf*cos(phi)*sin(phi)-df*dphi)*xf^2
+(-2*df*lf0*dphi+2*kf*lf0*cos(phi)*sin(phi)-g*m*cos(phi))*xf-df*lf0^2*dphi
++kf*lf0^2*cos(phi)*sin(phi)+((a-1)*g*ll0-g*lf0)*m*cos(phi))
+/
+((a-1)*m*xl^2+((2*a-2)*m*xf*((2*a-2)*ll0+(2*a-2)*lf0)*m)*xl-m*xf^2
++((2*a-2)*ll0-2*lf0)*m*xf+((a-1)*ll0^2+(2*a-2)*lf0*ll0-lf0^2)*m)
+
+
+ddphi  | lf0=ll0=0
+=- ((2*a-2)*m*dphi*xl+(2*a-2)*m*dphi*xf)*dxl + ((2*a-2)*m*dphi*dxf+(a-1)*m*g*cos(phi))*xl
+    - 2*m*dphi*xf*dxf+(kf*cos(phi)*sin(phi)-df*dphi)*xf^2-m*g*cos(phi)*xf
+ / 
+ ((a-1)*m*xl^2+(2*a-2)*m*xf*xl-m*xf^2)
